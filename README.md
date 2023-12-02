@@ -7,8 +7,8 @@ This repository contains the sentiment analysis project for Amazon Review Data i
 To use this project, first clone the repository and install the required Python dependencies:
 
 ```
-git clone URL_to_this_repo
-cd to_this_repo
+git clone https://github.com/wibubunbo/CS4480_Project.git
+cd ./CS4480_Project
 pip install -r requirements.txt
 ```
 
