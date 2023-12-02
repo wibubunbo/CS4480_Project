@@ -27,6 +27,24 @@ After downloading, unzip the files to proceed with data processing and cleaning.
 
 The Jupyter Notebook `cleaning_data.ipynb` is provided for the initial data processing and cleaning steps.
 
+## Hadoop File System Preparation
+
+Create the necessary directories in HDFS, make sure you already started all Hadoop daemons, the namenode, datanodes by `start-all.sh` first.
+
+```
+hdfs dfs -mkdir /Amazon_Project
+hdfs dfs -mkdir /Amazon_Project_Stem
+hdfs dfs -mkdir /Amazon_Project_Lemma
+
+hdfs dfs -mkdir /Amazon_Project/Input
+hdfs dfs -mkdir /Amazon_Project_Stem/Input
+hdfs dfs -mkdir /Amazon_Project_Lemma/Input
+
+hdfs dfs -mkdir /Amazon_Project/Output
+hdfs dfs -mkdir /Amazon_Project_Stem/Output
+hdfs dfs -mkdir /Amazon_Project_Lemma/Output
+```
+
 ## Hadoop MapReduce Implementation
 
 #### Preparing the Data
