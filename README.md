@@ -1,2 +1,81 @@
-# CS4480_Project
-CS4480-Data-intensive Computing Project about sentiment analysis on Amazon Review Dataset using Hadoop MapReduce
+# Amazon Review Sentiment Analysis
+
+This repository contains the sentiment analysis project for Amazon Review Data in the category of Cell Phones and Accessories. This project is part of the coursework for CS4480 - Data-intensive Computing at City University of Hong Kong.
+
+## Getting Started
+
+To use this project, first clone the repository and install the required Python dependencies:
+
+```
+git clone URL_to_this_repo
+cd to_this_repo
+pip install -r requirements.txt
+```
+
+## Data Acquisition
+
+To acquire the necessary data, use the following commands:
+
+```
+!wget https://datarepo.eng.ucsd.edu/mcauley_group/data/amazon_v2/categoryFiles/Cell_Phones_and_Accessories.json.gz
+!wget https://datarepo.eng.ucsd.edu/mcauley_group/data/amazon_v2/metaFiles2/meta_Cell_Phones_and_Accessories.json.gz
+```
+
+After downloading, unzip the files to proceed with data processing and cleaning.
+
+## Data Processing and Cleaning
+
+The Jupyter Notebook `cleaning_data.ipynb` is provided for the initial data processing and cleaning steps.
+
+## Hadoop MapReduce Implementation
+
+#### Preparing the Data
+
+Put the training and test datasets into HDFS using the following commands:
+
+For the dataset without stemming and lemmatization:
+
+```
+hdfs dfs -put ./train1.csv /Amazon_Project/Input
+hdfs dfs -put ./test1.csv /Amazon_Project/Input
+```
+
+For the dataset with stemming:
+
+```
+hdfs dfs -put ./train2.csv /Amazon_Project_Stem/Input
+hdfs dfs -put ./test2.csv /Amazon_Project_Stem/Input
+```
+
+For the dataset with lemmatization:
+
+```
+hdfs dfs -put ./train3.csv /Amazon_Project_Lemma/Input
+hdfs dfs -put ./test3.csv /Amazon_Project_Lemma/Input
+```
+
+#### Running the Naive Bayes Model
+
+`Modified_NB.java` contains the implementation of the Naive Bayes algorithm. Compile and run the code using the following commands:
+
+```
+javac -classpath $(hadoop classpath) -d Modified_NB_classes Modified_NB.java
+jar -cvf Modified_NB.jar -C Modified_NB_classes/ .
+hadoop jar Modified_NB.jar Modified_NB /Amazon_Project/Input/train1.csv /Amazon_Project/Input/test1.csv /Amazon_Project/Output
+```
+
+Repeat the `hadoop jar` command as necessary for the other datasets.
+
+#### Retrieving Output Data
+
+After completing the MapReduce jobs, merge and retrieve the output job files with the following commands:
+
+```
+hdfs dfs -getmerge /Amazon_Project/Output/wordcount ./wordcount.txt
+hdfs dfs -getmerge /Amazon_Project/Output/tfidf ./tfidf.txt
+hdfs dfs -getmerge /Amazon_Project/Output/features ./features.txt
+```
+
+## Visualization
+
+To visualize the results after the Hadoop MapReduce process, use the `visualization_result.ipynb` Jupyter Notebook.
