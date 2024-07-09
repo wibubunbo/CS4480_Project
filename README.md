@@ -2,6 +2,16 @@
 
 This repository contains the sentiment analysis project for Amazon Review Data in the category of Cell Phones and Accessories. This project is part of the coursework for CS4480 - Data-intensive Computing at City University of Hong Kong.
 
+## Prerequisites
+
+- Java 8 or higher
+- Scala 2.12.15
+- Apache Spark 3.2.0
+- Apache Hadoop 3.x
+- SBT (Scala Build Tool)
+- Python 3.7+
+- Miniconda/Conda/Virtualenv
+
 ## Getting Started
 
 To use this project, first clone the repository and install the required Python dependencies:
@@ -25,7 +35,14 @@ After downloading, unzip the files to proceed with data processing and cleaning.
 
 ## Data Processing and Cleaning
 
-The Jupyter Notebook `cleaning_data.ipynb` is provided for the initial data processing and cleaning steps.
+We use Apache Spark with Scala for data cleaning and preprocessing. The main cleaning script is `DataCleaning.scala`.
+
+To compile and run the data cleaning process:
+
+```
+sbt compile
+sbt "runMain DataCleaning"
+```
 
 ## Hadoop File System Preparation
 
